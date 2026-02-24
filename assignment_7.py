@@ -24,30 +24,29 @@ while True:
 
     parts = line.split("|")
 
-   
-    if len(parts) != 5:
-        continue
-
-    code_raw = parts[0].strip()
-    title_raw = parts[1].strip()
-    days_raw = parts[2].strip()
-    time_raw = parts[3].strip()
-    room_raw = parts[4].strip()
+    code = parts[0].strip()
+    title = parts[1].strip()
+    days = parts[2].strip()
+    time = parts[3].strip()
+    room = parts[4].strip()
 
     
-    code_parts = code_raw.split()
-    dept = code_parts[0].upper() if len(code_parts) > 0 else ""
-    num = code_parts[1] if len(code_parts) > 1 else ""
-    code_clean = (dept + " " + num).strip()
+    code_parts = code.split()
+    dept = code_parts[0].upper()
+    num = code_parts[1]
+    code = dept + " " + num
 
     
-    courses.append([code_clean, title_raw, days_raw, time_raw, room_raw])
+    courses.append([code, title, days, time, room])
 
 
 # ============================================================
 # Step 2: Title and Room Formatting
 # ============================================================
 
+for course in courses:
+    course[1] = course[1].title()
+    course[4] = course[4].title()
 
 # ============================================================
 # Step 3: Day Code Expansion
