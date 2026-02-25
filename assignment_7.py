@@ -52,6 +52,23 @@ for course in courses:
 # Step 3: Day Code Expansion
 # ============================================================
 
+for course in courses:
+    days_code = course[2].upper()
+    full_days = []
+
+    for character in days_code:
+        if character == "M":
+            full_days.append("Monday")
+        elif character == "T":
+            full_days.append("Tuesday")
+        elif character == "W":
+            full_days.append("Wednesday")
+        elif character == "R":
+            full_days.append("Thursday")
+        elif character == "F":
+            full_days.append("Friday")
+
+    course[2] = "/".join(full_days)
 
 # ============================================================
 # Step 4: Time Standardization
