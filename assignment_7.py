@@ -16,13 +16,17 @@ AI Usage: None
 
 courses = []
 
-while True:
+# Collect courses until user types DONE
+
+while True: 
     line = input().strip()
 
     if line == "DONE":
         break
 
-    parts = line.split("|")
+# Split input into its 5 parts using |
+
+    parts = line.split("|") 
 
     code = parts[0].strip()
     title = parts[1].strip()
@@ -56,6 +60,8 @@ for course in courses:
     days_code = course[2].upper()
     full_days = []
 
+# Convert compressed day codes like MW into full day names
+
     for character in days_code:
         if character == "M":
             full_days.append("Monday")
@@ -73,6 +79,8 @@ for course in courses:
 # ============================================================
 # Step 4: Time Standardization
 # ============================================================
+
+# Split time into clock part and AM/PM, then format consistently
 
 for course in courses:
     time = course[3].strip().lower()
@@ -98,7 +106,9 @@ for i in range(len(courses)):
 
         time1 = courses[i][3]
         time2 = courses[j][3]
-
+                                
+  # Compare each pair of courses to check for conflicts
+                                
         shared_days = []
         for day in days1:
             if day in days2:
@@ -114,6 +124,8 @@ for i in range(len(courses)):
 
 print("=== AGGIE COURSE SCHEDULE ===")
 print()
+
+# Align output into fixed-width columns for clean printing
 
 for i in range(len(courses)):
     course = courses[i]
