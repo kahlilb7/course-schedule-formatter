@@ -74,12 +74,81 @@ for course in courses:
 # Step 4: Time Standardization
 # ============================================================
 
+for course in courses:
+    time = course[3].strip().lower()
+
+    am_pm = time[-2:].upper()
+    clock = time[:-2]
+
+    course[3] = clock + " " + am_pm
 
 # ============================================================
 # Step 5: Conflict Detection
 # ============================================================
 
+conflicts = []
+
+for i in range(len(courses)):
+    for j in range(i + 1, len(courses)):
+        code1 = courses[i][0]
+        code2 = courses[j][0]
+
+        days1 = courses[i][2].split("/")
+        days2 = courses[j][2].split("/")
+
+        time1 = courses[i][3]
+        time2 = courses[j][3]
+
+        shared_days = []
+        for day in days1:
+            if day in days2:
+                shared_days.append(day)
+
+        if len(shared_days) > 0 and time1 == time2:
+            conflicts.append(code1 + " and " + code2 + " conflict on " +
+                             ", ".join(shared_days) + " at " + time1)
 
 # ============================================================
 # Step 6: Full Output & Formatted Printing
 # ============================================================
+
+print("=== AGGIE COURSE SCHEDULE ===")
+print()
+
+for i in range(len(courses)):
+    course = courses[i]
+    print("COURSE " + str(i + 1) + ":")
+    print("  Code:  " + course[0])
+    print("  Title: " + course[1])
+    print("  Days:  " + course[2])
+    print("  Time:  " + course[3])
+    print("  Room:  " + course[4])
+    print()
+
+print("=== SCHEDULE SUMMARY ===")
+print("Total courses: " + str(len(courses)))
+print()
+
+print("=== CONFLICT REPORT ===")
+if len(conflicts) == 0:
+    print("No conflicts detected.")
+else:
+    for c in conflicts:
+        print(c)
+print()
+
+print("=== FORMATTED FOR PRINTING ===")
+for course in courses:
+    code = course[0].ljust(10)
+    title = course[1].ljust(26)
+    time = course[3].ljust(11)
+
+    abbreviations = course[2]
+    abbreviations = abbreviations.replace("Monday", "Mon")
+    abbreviations = abbreviations.replace("Tuesday", "Tue")
+    abbreviations = abbreviations.replace("Wednesday", "Wed")
+    abbreviations = abbreviations.replace("Thursday", "Thu")
+    abbreviations = abbreviations.replace("Friday", "Fri")
+    abbreviations = abbreviations.ljust(13)
+
+    print(code + title + abbreviations + time + course[4])
