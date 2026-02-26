@@ -130,7 +130,7 @@ The days field requires you to process the string one character at a time rather
 than treating it as a whole. Why is that necessary? Could you have produced the
 same result with a single string method call instead of a loop? Explain your reasoning.
 
-*Your answer here.*
+The days field had to be processed one character at a time because the input is given as something like “MWF” with no spaces or separators. Each letter represents a different day, so the program needs to read each character individually and convert it to the full day name. If I treated the whole string as one piece, Python would just see “MWF” as a single value. There isn’t one string method that can automatically turn “MWF” into “Monday/Wednesday/Friday,” so using a loop was necessary.
 
 ---
 
@@ -141,7 +141,7 @@ How did you identify where one part ends and the other begins in your program?
 What would break in your solution if the input format changed — for example,
 if times were given as `9am` instead of `9:00am`?
 
-*Your answer here.*
+To separate the time, I assumed the last two characters would always be “am” or “pm.” I used slicing to take the last two characters as the period part and everything before that as the actual time. This works because the input format is consistent like “9:00am.” If the format changed to something like “9am,” my solution would break because it depends on the last two characters always being the AM/PM indicator.
 
 ---
 
@@ -152,7 +152,7 @@ all input has been collected. Why can't you check for conflicts as each course
 is entered, before the user types DONE? What data structure did you use to store
 the courses, and why was that a good choice for this comparison?
 
-*Your answer here.*
+I couldn’t check for conflicts while the user was still entering courses because I wouldn’t have all the data yet. Conflict detection requires comparing every course against the others, so I needed to wait until all input was collected. I used a list of lists to store the courses because it keeps each course’s data grouped together, which makes it easier to compare codes, days, and times between courses.
 
 ---
 
@@ -162,10 +162,12 @@ What is the difference between *cleaning* data and *formatting* data?
 Give one specific example of each from your own program and explain
 why the distinction matters.
 
-*Your answer here.*
+Cleaning data means fixing or standardizing the input so it is consistent. For example, I converted titles and rooms to title case and made the time format consistent. Formatting data means organizing it for output, like using .ljust() to align columns in the final schedule. The difference matters because cleaning makes the data correct internally, while formatting makes it look correct when printed.
 
 ---
 
 ## AI Usage
 
 Describe any AI assistance you used, or write "None."
+
+None
