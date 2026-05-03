@@ -1,173 +1,31 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/2WukAeYI)
-# COMP 163 — Assignment 7: Course Schedule Formatter
+# Course Schedule Formatter
 
 ## Overview
+This project reads course registration data, cleans and formats each field, detects scheduling conflicts, and outputs a structured course schedule.
 
-Write a Python program that reads raw course registration data entered by the user,
-cleans every field using string methods, detects scheduling conflicts, and outputs
-a professional course schedule.
+## Features
+- Parses user input using `|`
+- Cleans course codes, titles, and rooms
+- Expands day abbreviations (MW → Monday/Wednesday)
+- Standardizes time format (9:00am → 9:00 AM)
+- Detects scheduling conflicts
+- Outputs a formatted schedule
 
-Input is entered one course at a time in the format:
-
-```
-code|title|days|time|room
-```
-
-The program continues reading until the user types `DONE`.
-
----
-
-## Getting Started
-
-Your solution goes in `assignment_7.py`. The section comments are already there
-to guide your development order. Do not modify `test_assignment.py`.
-
-Run the tests locally at any time with:
-
+## How to Run
 ```bash
-python -m pytest test_assignment.py -v
-```
+python course_schedule_formatter.py
 
-A green checkmark in the GitHub Actions tab means that test is passing for grading.
+Enter course data in this format:
 
----
+code|title|days|time|room
 
-## Day Code Reference
+Type DONE when finished.
 
-| Code | Full Name | Short Name |
-|------|-----------|------------|
-| M    | Monday    | Mon        |
-| T    | Tuesday   | Tue        |
-| W    | Wednesday | Wed        |
-| R    | Thursday  | Thu        |
-| F    | Friday    | Fri        |
+Project Background
 
-Full names are used in the COURSE blocks. Short names are used in the FORMATTED FOR PRINTING section.
+This project was originally completed as part of a Computer Science course and later refined for portfolio use.
 
----
-
-## Required Output Sections
-
-Your program must produce four sections in this order:
-
-```
-=== AGGIE COURSE SCHEDULE ===
-
-COURSE 1:
-  Code:  CS 163
-  Title: Intro To Programming
-  Days:  Monday/Wednesday
-  Time:  9:00 AM
-  Room:  Ncat 101
-
-=== SCHEDULE SUMMARY ===
-Total courses: 1
-
-=== CONFLICT REPORT ===
-No conflicts detected.
-
-=== FORMATTED FOR PRINTING ===
-CS 163    Intro To Programming      Mon/Wed      9:00 AM    Ncat 101
-```
-
----
-
-## Formatted Printing Column Widths
-
-The FORMATTED FOR PRINTING section must use these exact left-aligned column widths:
-
-| Column     | Width |
-|------------|-------|
-| Code       | 10    |
-| Title      | 26    |
-| Short days | 13    |
-| Time       | 11    |
-| Room       | none  |
-
----
-
-## Conflict Detection Format
-
-When two courses share at least one day **and** the same time:
-
-```
-CS 163 and ENG 101 conflict on Monday, Wednesday at 9:00 AM
-```
-
-When courses share a day but not a time, or share a time but not a day, no conflict is reported.
-If no conflicts exist across all courses:
-
-```
-No conflicts detected.
-```
-
----
-
-## Required Git Commits
-
-Make these commits in order as you complete each step:
-
-1. `"Step 1: Input parsing and course code formatting"`
-2. `"Step 2: Title and room formatting"`
-3. `"Step 3: Day code expansion"`
-4. `"Step 4: Time standardization"`
-5. `"Step 5: Conflict detection"`
-6. `"Step 6: Complete output and formatted printing"`
-
----
-
-## README Reflection Questions
-
-Answer all four questions below. Write your answers directly in this file
-beneath each question. Answers should be written in complete sentences.
-Incomplete or vague answers will not receive full credit.
-
----
-
-**Question 1**
-
-The days field requires you to process the string one character at a time rather
-than treating it as a whole. Why is that necessary? Could you have produced the
-same result with a single string method call instead of a loop? Explain your reasoning.
-
-The days field had to be processed one character at a time because the input is given as something like “MWF” with no spaces or separators. Each letter represents a different day, so the program needs to read each character individually and convert it to the full day name. If I treated the whole string as one piece, Python would just see “MWF” as a single value. There isn’t one string method that can automatically turn “MWF” into “Monday/Wednesday/Friday,” so using a loop was necessary.
-
----
-
-**Question 2**
-
-The time field contains two distinct parts that need to be handled differently.
-How did you identify where one part ends and the other begins in your program?
-What would break in your solution if the input format changed — for example,
-if times were given as `9am` instead of `9:00am`?
-
-To separate the time, I assumed the last two characters would always be “am” or “pm.” I used slicing to take the last two characters as the period part and everything before that as the actual time. This works because the input format is consistent like “9:00am.” If the format changed to something like “9am,” my solution would break because it depends on the last two characters always being the AM/PM indicator.
-
----
-
-**Question 3**
-
-Conflict detection requires you to compare courses against each other after
-all input has been collected. Why can't you check for conflicts as each course
-is entered, before the user types DONE? What data structure did you use to store
-the courses, and why was that a good choice for this comparison?
-
-I couldn’t check for conflicts while the user was still entering courses because I wouldn’t have all the data yet. Conflict detection requires comparing every course against the others, so I needed to wait until all input was collected. I used a list of lists to store the courses because it keeps each course’s data grouped together, which makes it easier to compare codes, days, and times between courses.
-
----
-
-**Question 4**
-
-What is the difference between *cleaning* data and *formatting* data?
-Give one specific example of each from your own program and explain
-why the distinction matters.
-
-Cleaning data means fixing or standardizing the input so it is consistent. For example, I converted titles and rooms to title case and made the time format consistent. Formatting data means organizing it for output, like using .ljust() to align columns in the final schedule. The difference matters because cleaning makes the data correct internally, while formatting makes it look correct when printed.
-
----
-
-## AI Usage
-
-Describe any AI assistance you used, or write "None."
-
-None
+Future Improvements
+Add input validation
+Improve user interaction
+Convert logic into functions
