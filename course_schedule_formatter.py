@@ -20,8 +20,11 @@ courses = []
 
 # Collect courses until user types DONE
 
-while True: 
-    line = input().strip()
+while True:
+    while True:
+        line = input().strip()
+        if line:
+            break
 
     if line == "DONE":
         break
