@@ -1,18 +1,20 @@
 """
-COMP 163 - Introduction to Programming
-Assignment: Assignment 7 - Course Schedule Formatter
-Name: Kahlil Batieste
-GitHub Username: kahlilb7
-Date: February 23, 2026
-Description: This program reads course registration data entered by the user,
-cleans and formats each field, detects scheduling conflicts, and prints a
-professional course schedule.
-AI Usage: None
+Course Schedule Formatter
+
+This program reads course data, cleans and formats each field,
+detects scheduling conflicts, and outputs a structured schedule.
+
+Features:
+- Input parsing and cleaning
+- Day expansion (MW → Monday/Wednesday)
+- Time formatting
+- Conflict detection
+- Formatted schedule output
+
+Author: Kahlil Batieste
 """
 
-# ============================================================
-# Step 1: Input Parsing & Course Code Formatting
-# ============================================================
+# --- Input Parsing & Course Code Formatting ---
 
 courses = []
 
@@ -44,17 +46,13 @@ while True:
     courses.append([code, title, days, time, room])
 
 
-# ============================================================
-# Step 2: Title and Room Formatting
-# ============================================================
+# --- Title and Room Formatting ---
 
 for course in courses:
     course[1] = course[1].title()
     course[4] = course[4].title()
 
-# ============================================================
-# Step 3: Day Code Expansion
-# ============================================================
+# --- Day Code Expansion ---
 
 for course in courses:
     days_code = course[2].upper()
@@ -76,9 +74,7 @@ for course in courses:
 
     course[2] = "/".join(full_days)
 
-# ============================================================
-# Step 4: Time Standardization
-# ============================================================
+# --- Time Standardization ---
 
 # Split time into clock part and AM/PM, then format consistently
 
@@ -90,9 +86,7 @@ for course in courses:
 
     course[3] = clock + " " + am_pm
 
-# ============================================================
-# Step 5: Conflict Detection
-# ============================================================
+# --- Conflict Detection ---
 
 conflicts = []
 
@@ -118,9 +112,7 @@ for i in range(len(courses)):
             conflicts.append(code1 + " and " + code2 + " conflict on " +
                              ", ".join(shared_days) + " at " + time1)
 
-# ============================================================
-# Step 6: Full Output & Formatted Printing
-# ============================================================
+# --- Output & Formatted Printing ---
 
 print("=== AGGIE COURSE SCHEDULE ===")
 print()
