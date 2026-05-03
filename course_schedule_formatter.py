@@ -54,6 +54,8 @@ for course in courses:
 
 # --- Day Code Expansion ---
 
+# Loop through each character since days 
+# are stored as combined letters like "MWF"
 for course in courses:
     days_code = course[2].upper()
     full_days = []
